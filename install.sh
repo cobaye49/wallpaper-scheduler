@@ -24,12 +24,21 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
     mkdir -p "$WALLPAPER_DIR"
 fi
 
-# Création optionnelle de fichiers placeholders
+echo "Installing default wallpapers..."
+
 for name in morning noon afternoon evening; do
-    FILE="$WALLPAPER_DIR/$name.png"
-    if [ ! -f "$FILE" ]; then
-        echo "Creating placeholder: $FILE"
-        touch "$FILE"
+    # Rechercher le fichier correspondant dans default-wallpapers/
+    FILE=$(ls "default-wallpapers/$name".* 2>/dev/null | head -n 1)
+    if [ -n "$FILE" ]; then
+        DEST="$HOME/Images/Wallpapers/$(basename "$FILE")"
+        if [ ! -f "$DEST" ]; then
+            echo "📄 Copying $FILE → $DEST"
+            cp "$FILE" "$DEST"
+        else
+            echo "⚠️  $DEST already exists — skipping (user may have customized it)"
+        fi
+    else
+        echo "❌ No default image found for '$name'"
     fi
 done
 
