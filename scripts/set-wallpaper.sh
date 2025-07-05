@@ -6,14 +6,15 @@ HOUR=$((10#$HOUR))
 
 WALLPAPER_DIR="$HOME/Images/Wallpapers"
 
+# Détermine le préfixe du nom selon l'heure
 if (( 6 <= HOUR && HOUR < 11 )); then
-    IMAGE="$WALLPAPER_DIR/morning.png"
+    PREFIX="morning"
 elif (( 11 <= HOUR && HOUR < 14 )); then
-    IMAGE="$WALLPAPER_DIR/noon.png"
+    PREFIX="noon"
 elif (( 14 <= HOUR && HOUR < 18 )); then
-    IMAGE="$WALLPAPER_DIR/afternoon.png"
+    PREFIX="afternoon"
 else
-    IMAGE="$WALLPAPER_DIR/evening.png"
+    PREFIX="evening"
 fi
 
 # Détection de l'environnement de bureau
