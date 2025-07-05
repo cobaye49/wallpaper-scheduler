@@ -1,20 +1,20 @@
 #!/bin/bash
 
-echo "📁 Création des dossiers nécessaires..."
+echo "Folders creation..."
 mkdir -p ~/.local/bin
 mkdir -p ~/.config/systemd/user
 
-echo "📥 Copie du script..."
+echo "Script copy..."
 cp scripts/set-wallpaper.sh ~/.local/bin/set-wallpaper.sh
 chmod +x ~/.local/bin/set-wallpaper.sh
 
-echo "🧷 Copie des fichiers systemd..."
+echo "systemd files copy..."
 cp systemd/wallpaper.* ~/.config/systemd/user/
 
-echo "🔄 Rechargement de systemd..."
+echo "systemd reload..."
 systemctl --user daemon-reload
 
-echo "✅ Activation du timer..."
+echo "Timer activation..."
 systemctl --user enable --now wallpaper.timer
 
-echo "🎉 Installation terminée !"
+echo "Installation done !"
