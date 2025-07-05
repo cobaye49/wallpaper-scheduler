@@ -25,7 +25,7 @@ if [ -z "$IMAGE" ]; then
 fi
 
 # Détection de l'environnement de bureau
-DE="${XDG_CURRENT_DESKTOP,,}"  # en minuscules
+DE="${XDG_CURRENT_DESKTOP,,}"
 
 if [ -z "$DE" ]; then
     echo "Could not detect desktop environment (XDG_CURRENT_DESKTOP is empty)."
@@ -41,6 +41,41 @@ case "$DE" in
     gsettings set org.gnome.desktop.background picture-uri-dark "file://$IMAGE"
     ;;
   *kde*)
+    if ! command -v qdbus >/dev/null 2>&1; then
+      echo "'qdbus' not found. Attempting to install it..."
+
+      if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        case "$ID" in
+          fedora|rhel|centos)
+            sudo dnf install -y qt5-qttools
+            ;;
+          debian|ubuntu|linuxmint)
+            sudo apt update && sudo apt install -y qt5-default qttools5-dev-tools
+            ;;
+          arch|manjaro)
+            sudo pacman -Sy --noconfirm qt5-tools
+            ;;
+          opensuse*)
+            sudo zypper install -y libqt5-qttools
+            ;;
+          *)
+            echo "Unknown distribution '$ID'. Please install 'qdbus' manually."
+            exit 1
+            ;;
+        esac
+      else
+        echo "Unable to detect your distribution. Please install 'qdbus' manually."
+        exit 1
+      fi
+
+      # Vérifier à nouveau
+      if ! command -v qdbus >/dev/null 2>&1; then
+        echo "Installation of qdbus failed or was incomplete."
+        exit 1
+      fi
+    fi
+
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
       var allDesktops = desktops();
       for (i = 0; i < allDesktops.length; i++) {
