@@ -1,9 +1,9 @@
 #!/bin/bash
 
 HOUR=$(date +%H)
-HOUR=$((10#$HOUR))  # éviter les erreurs d'octal
+HOUR=$((10#$HOUR))  # avoid octal error
 
-WALLPAPER_DIR="$HOME/Images/Wallpapers"
+WALLPAPER_DIR="$HOME/Images/Wallpapers" # set the folder you want
 
 if (( 6 <= HOUR && HOUR < 11 )); then
     IMAGE="$WALLPAPER_DIR/morning.png"
