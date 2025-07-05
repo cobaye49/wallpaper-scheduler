@@ -22,8 +22,21 @@ git clone https://github.com/cobaye49/wallpaper-scheduler.git
 cd wallpaper-scheduler
 ./install.sh
 ```
-
 Copy your wallpapers named `morning`, `noon`, `afternoon`, `evening` in `~/Images/Wallpapers/`
 
+## Manual test
 
+You can test the script directly by running:
+```bash
+~/.local/bin/set-wallpaper.sh
+```
+## Uninstall
 
+To disable the wallpaper scheduler:
+```bash
+systemctl --user disable --now wallpaper.timer
+```
+Then, if needed, remove files manually from:
+- `~/.local/bin/set-wallpaper.sh`
+- `~/.config/systemd/user/wallpaper.*`
+- `~/Images/Wallpapers/ (optional)`
