@@ -24,10 +24,6 @@ cd wallpaper-scheduler
 ```
 
 Make sure your wallpapers are in `~/Images/Wallpapers/` with names:
-`morning.png`, `noon.png`, `afternoon.png`, `evening.png`.
+`morning`, `noon`, `afternoon`, `evening`.
 
-## Requirements
 
-- GNOME
-- `gsettings` available
-- systemd user session active
