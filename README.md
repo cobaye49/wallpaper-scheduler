@@ -1,6 +1,6 @@
-# Wallpaper Scheduler for GNOME
+# Wallpaper Scheduler
 
-Wallpaper Scheduler is a simple automation tool for GNOME desktop environments that changes your wallpaper automatically based on the time of day.
+Wallpaper Scheduler is a simple automation tool that changes your wallpaper automatically based on the time of day.
 
 ## How it works:
 
