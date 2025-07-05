@@ -1,0 +1,6 @@
+[Unit]
+Description=Change wallpaper depending on time
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/set-wallpaper.sh

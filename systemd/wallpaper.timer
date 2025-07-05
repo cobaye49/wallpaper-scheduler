@@ -1,0 +1,10 @@
+[Unit]
+Description=Change wallpaper automatically during the day
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=15min
+Unit=wallpaper.service
+
+[Install]
+WantedBy=default.target
