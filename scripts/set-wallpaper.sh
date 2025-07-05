@@ -21,11 +21,16 @@ fi
 IMAGE=$(ls "$WALLPAPER_DIR"/${PREFIX}.* 2>/dev/null | head -n 1)
 if [ -z "$IMAGE" ]; then
     echo "No wallpaper found for prefix '$PREFIX' in $WALLPAPER_DIR"
-    exit 0
+    exit 1
 fi
 
 # Détection de l'environnement de bureau
-DE="${XDG_CURRENT_DESKTOP,,}"  # tout en minuscules
+DE="${XDG_CURRENT_DESKTOP,,}"  # en minuscules
+
+if [ -z "$DE" ]; then
+    echo "Could not detect desktop environment (XDG_CURRENT_DESKTOP is empty)."
+    exit 1
+fi
 
 echo "Detected desktop environment: $DE"
 echo "Setting wallpaper: $IMAGE"
@@ -36,10 +41,9 @@ case "$DE" in
     gsettings set org.gnome.desktop.background picture-uri-dark "file://$IMAGE"
     ;;
   *kde*)
-    # Utilisation de DBus pour KDE Plasma
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
       var allDesktops = desktops();
-      for (i=0;i<allDesktops.length;i++) {
+      for (i = 0; i < allDesktops.length; i++) {
         d = allDesktops[i];
         d.wallpaperPlugin = 'org.kde.image';
         d.currentConfigGroup = Array('Wallpaper', 'org.kde.image', 'General');
@@ -47,8 +51,6 @@ case "$DE" in
       }"
     ;;
   *xfce*)
-    # Pour XFCE (suppose xfconf-query installé)
-    DISPLAY_NUM=$(echo $DISPLAY | sed 's/[^0-9]*//g')
     xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s "$IMAGE"
     ;;
   *mate*)
@@ -58,6 +60,6 @@ case "$DE" in
     gsettings set org.cinnamon.desktop.background picture-uri "file://$IMAGE"
     ;;
   *)
-    echo "Desktop environment '$DE' not supported yet."
+    echo "Desktop environment '$DE' not supported or unrecognized."
     ;;
 esac
