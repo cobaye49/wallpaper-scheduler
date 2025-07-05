@@ -17,6 +17,13 @@ else
     PREFIX="evening"
 fi
 
+# Recherche l'image correspondante
+IMAGE=$(ls "$WALLPAPER_DIR"/${PREFIX}.* 2>/dev/null | head -n 1)
+if [ -z "$IMAGE" ]; then
+    echo "No wallpaper found for prefix '$PREFIX' in $WALLPAPER_DIR"
+    exit 0
+fi
+
 # Détection de l'environnement de bureau
 DE="${XDG_CURRENT_DESKTOP,,}"  # tout en minuscules
 
