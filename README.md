@@ -2,7 +2,7 @@
 
 Wallpaper Scheduler is a simple automation tool for GNOME desktop environments that changes your wallpaper automatically based on the time of day.
 
-How it works:
+## How it works:
 
 - A small Bash script determines the current hour and selects the appropriate image.
 - A systemd user timer runs the script every 15 minutes.
