@@ -14,7 +14,7 @@ If your environment is not supported, the script will simply show a message and 
 ## How it works
 
 - A small Bash script determines the current hour and selects the appropriate image.
-- A systemd user timer runs the script every 15 minutes.
+- A systemd user timer runs the script every 5 minutes.
 
 ## Time slots
 
