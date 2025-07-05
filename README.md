@@ -1,6 +1,12 @@
 # Wallpaper Scheduler for GNOME (Fedora)
 
-Automatically changes your wallpaper depending on the time of day.
+Wallpaper Scheduler is a simple automation tool for GNOME desktop environments (like Fedora Workstation) that changes your wallpaper automatically based on the time of day.
+
+How it works:
+
+- A small Bash script determines the current hour and selects the appropriate image.
+- A systemd user timer runs the script every 15 minutes.
+- The wallpaper is updated using gsettings, fully compatible with GNOME.
 
 ## Time slots
 
