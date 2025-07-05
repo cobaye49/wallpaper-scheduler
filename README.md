@@ -23,7 +23,7 @@ cd wallpaper-scheduler
 ./install.sh
 ```
 
-Make sure your wallpapers are in `~/Images/Wallpapers/` with names:
-`morning`, `noon`, `afternoon`, `evening`.
+Copy your wallpapers named `morning`, `noon`, `afternoon`, `evening` in `~/Images/Wallpapers/`
+
 
 
