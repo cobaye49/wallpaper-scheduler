@@ -28,6 +28,7 @@ If your environment is not supported, the script will simply show a message and 
 ```bash
 git clone https://github.com/cobaye49/wallpaper-scheduler.git
 cd wallpaper-scheduler
+chmod +x install.sh
 ./install.sh
 ```
 Copy your wallpapers named `morning`, `noon`, `afternoon`, `evening` in `~/Images/Wallpapers/`
