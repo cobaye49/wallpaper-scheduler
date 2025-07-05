@@ -11,12 +11,6 @@ chmod +x ~/.local/bin/set-wallpaper.sh
 echo "Copying systemd unit files..."
 cp systemd/wallpaper.* ~/.config/systemd/user/
 
-echo "Reloading systemd user units..."
-systemctl --user daemon-reload
-
-echo "Enabling and starting wallpaper timer..."
-systemctl --user enable --now wallpaper.timer
-
 # Vérification/création du répertoire des fonds d'écran
 WALLPAPER_DIR="$HOME/Images/Wallpapers"
 if [ ! -d "$WALLPAPER_DIR" ]; then
@@ -32,15 +26,21 @@ for name in morning noon afternoon evening; do
     if [ -n "$FILE" ]; then
         DEST="$HOME/Images/Wallpapers/$(basename "$FILE")"
         if [ ! -f "$DEST" ]; then
-            echo "📄 Copying $FILE → $DEST"
+            echo "Copying $FILE → $DEST"
             cp "$FILE" "$DEST"
         else
-            echo "⚠️  $DEST already exists — skipping (user may have customized it)"
+            echo " $DEST already exists — skipping (user may have customized it)"
         fi
     else
-        echo "❌ No default image found for '$name'"
+        echo "No default image found for '$name'"
     fi
 done
 
+echo "Reloading systemd user units..."
+systemctl --user daemon-reload
+
+echo "Enabling and starting wallpaper timer..."
+systemctl --user enable --now wallpaper.timer
+
 echo "Installation complete!"
-echo "ℹYou can now replace the placeholder images in $WALLPAPER_DIR with your own .png wallpapers."
+echo "You can now replace the images in $WALLPAPER_DIR with your own wallpapers."
